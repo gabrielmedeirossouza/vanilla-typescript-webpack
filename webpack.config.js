@@ -23,7 +23,8 @@ module.exports = {
     extensions: ['.ts', '.js'],
     roots: [path.join(__dirname, 'src')],
     alias: {
-      '@core': path.join(__dirname, 'src/core')
+      '@core': path.join(__dirname, 'src/core'),
+      '@store': path.join(__dirname, 'src/store')
     }
   },
   module: {

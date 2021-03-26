@@ -1,14 +1,38 @@
+import store from '@store/index'
+
+import { clearCanvas } from '@core/ClearCanvas'
 import Person from '@core/Person'
 
-const position_player1 = {
-  x: 200,
-  y: 400
+const canvas = document.querySelector('.custom-canvas') as HTMLCanvasElement
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
+const context = canvas.getContext('2d')
+
+store.setContext(context)
+
+function gameLoop() {
+  clearCanvas(220, 220, 220)
+
+  new Person(
+    {
+      x: 100,
+      y: 200
+    },
+    30,
+    [255, 0, 0]
+  )
+
+  new Person(
+    {
+      x: 400,
+      y: 200
+    },
+    30,
+    [0, 255, 0]
+  )
+
+  window.requestAnimationFrame(gameLoop)
 }
 
-const size_player1 = 30
-
-const color_player1 = [255, 255, 255]
-
-const player1 = new Person(position_player1, size_player1, color_player1)
-
-console.log(player1.position, player1.size, player1.color)
+window.requestAnimationFrame(gameLoop)

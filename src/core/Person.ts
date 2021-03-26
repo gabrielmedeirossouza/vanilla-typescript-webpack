@@ -1,3 +1,5 @@
+import store from '@store/index'
+
 interface Vector {
   x: number,
   y: number
@@ -7,7 +9,7 @@ class Person {
 
   private _position: Vector
   private _size: number
-  private _color: Array<number>
+  private _color: string
 
   constructor(
     position: Vector,
@@ -16,24 +18,19 @@ class Person {
   ) {
     this._position = position
     this._size = size
-    this._color = color
+    this._color = `rgb(${color})`
     this.createPerson()
   }
 
   private createPerson() {
-    console.log(`A circle was drawable on position ${this._position.x}, ${this._position.y} with ${this._size} of size and color equals rgb(${this._color})`)
-  }
+    const ctx = store.getContext()
 
-  get position() {
-    return this._position
-  }
+    ctx.beginPath()
+    ctx.fillStyle = this._color
+    ctx.arc(this._position.x, this._position.y, this._size, 0, 2 * Math.PI, false)
+    ctx.fill()
+    ctx.closePath()
 
-  get size() {
-    return this._size
-  }
-
-  get color() {
-    return this._color
   }
 
 }
